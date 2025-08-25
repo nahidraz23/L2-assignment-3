@@ -12,6 +12,11 @@ dotenv_1.default.config();
 (0, db_1.default)();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
+// Default root route
+app.get("/", (req, res) => {
+    res.send("📚 Library Management API is running...");
+});
+// API routes
 app.use("/api/books", bookRoutes_1.default);
 app.use("/api/borrows", borrowRoutes_1.default);
 exports.default = app;

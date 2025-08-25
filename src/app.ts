@@ -10,6 +10,12 @@ connectDB();
 const app = express();
 app.use(express.json());
 
+// Default root route
+app.get("/", (req, res) => {
+  res.send("📚 Library Management API is running...");
+});
+
+// API routes
 app.use("/api/books", bookRoutes);
 app.use("/api/borrows", borrowRoutes);
 
