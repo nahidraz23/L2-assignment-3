@@ -79,16 +79,13 @@ book-borrowing-system/
     "copies": 5,
     "available": true
   }
-````
-
 * **Update a book**
   `PUT /api/books/:id`
 
   ```json
   {
     "copies": 50
-  }
-  ```
+  } 
 
 * **Delete a book**
   `DELETE /api/books/:id`
@@ -158,13 +155,12 @@ http://localhost:5000/api/borrows
 
 ```json
 "scripts": {
-  "dev": "ts-node-dev src/server.ts",
+  "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
   "build": "tsc",
   "start": "node dist/server.js"
 }
-```
 
-## 🔗 Dependencies
+🔗 Dependencies
 
 * express
 * mongoose
@@ -174,13 +170,13 @@ http://localhost:5000/api/borrows
 * @types/express
 * @types/node
 
-## 📌 Notes
+📌 Notes
 
 * Ensure MongoDB is running locally or use a cloud URI.
 * All validations are done via **Mongoose schemas**.
 * API strictly follows the **assignment requirements**.
 
-## 📌 License
+📌 License
 
 This project is **for educational purposes**.
 
