@@ -8,14 +8,35 @@ export const getBooks = async (req: Request, res: Response) => {
 
 export const addBook = async (req: Request, res: Response) => {
   try {
-    const { title, author } = req.body;
-    const book = new Book({ title, author });
+    const { title, author, genre, isbn, description, copies } = req.body;
+
+    // Create a new book with all fields
+    const book = new Book({
+      title,
+      author,
+      genre,
+      isbn,
+      description,
+      copies,
+      available: copies > 0,
+    });
+
     await book.save();
-    res.status(201).json(book);
+
+    res.status(201).json({
+      success: true,
+      message: "Book created successfully",
+      data: book,
+    });
   } catch (error) {
-    res.status(400).json({ message: "Failed to add book" });
+    res.status(400).json({
+      success: false,
+      message: "Failed to add book",
+      error: (error as Error).message,
+    });
   }
 };
+
 
 export const updateBook = async (req: Request, res: Response) => {
   try {
