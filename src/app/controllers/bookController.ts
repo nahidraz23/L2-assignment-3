@@ -8,25 +8,15 @@ export const getBooks = async (req: Request, res: Response) => {
 
 export const addBook = async (req: Request, res: Response) => {
   try {
-    const { title, author, genre, isbn, description, copies } = req.body;
-
-    // Create a new book with all fields
-    const book = new Book({
-      title,
-      author,
-      genre,
-      isbn,
-      description,
-      copies,
-      available: copies > 0,
-    });
+    const newBook = req.body;
+    const book = new Book(newBook);
 
     await book.save();
 
     res.status(201).json({
       success: true,
       message: "Book created successfully",
-      data: book,
+      book,
     });
   } catch (error) {
     res.status(400).json({
