@@ -19,7 +19,7 @@ export const borrowBook = async (req: Request, res: Response) => {
 
     res.status(201).json(borrow);
   } catch (error) {
-    res.status(400).json({ message: "Failed to borrow book" });
+    res.status(400).json(error);
   }
 };
 
@@ -39,6 +39,6 @@ export const returnBook = async (req: Request, res: Response) => {
 
     res.json({ message: "Book returned successfully", borrow });
   } catch (error) {
-    res.status(400).json({ message: "Failed to return book" });
+    res.status(400).json({ error });
   }
 };

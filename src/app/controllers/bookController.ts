@@ -34,7 +34,7 @@ export const updateBook = async (req: Request, res: Response) => {
     if (!book) return res.status(404).json({ message: "Book not found" });
     res.json(book);
   } catch (error) {
-    res.status(400).json({ message: "Failed to update book" });
+    res.status(400).json(error);
   }
 };
 
@@ -44,6 +44,6 @@ export const deleteBook = async (req: Request, res: Response) => {
     if (!book) return res.status(404).json({ message: "Book not found" });
     res.json({ message: "Book deleted successfully" });
   } catch (error) {
-    res.status(400).json({ message: "Failed to delete book" });
+    res.status(400).json(error);
   }
 };
