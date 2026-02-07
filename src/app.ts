@@ -18,6 +18,23 @@ app.use(cors({
   credentials: true
 }))
 
+app.use((req, res, next) => {
+  res.setHeader(
+    'Access-Control-Allow-Origin',
+    'https://book-shelf-client-pied.vercel.app'
+  );
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET,POST,PUT,PATCH,DELETE,OPTIONS'
+  );
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization'
+  );
+  next();
+});
+
+
 // Default root route
 app.get("/", (req, res) => {
   res.send("Library Management API is running...");
