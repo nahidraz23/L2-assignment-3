@@ -9,8 +9,9 @@ dotenv.config();
 connectDB();
 
 const app = express();
-
 app.use(express.json());
+app.options('*', cors());
+
 app.use(cors({
   origin: ['http://localhost:5173', 'https://book-shelf-client-pied.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
@@ -34,14 +35,13 @@ app.use((req, res, next) => {
   next();
 });
 
+// API routes
+app.use("/api/books", bookRoutes);
+app.use("/api/borrows", borrowRoutes);
 
 // Default root route
 app.get("/", (req, res) => {
   res.send("Library Management API is running...");
 });
-
-// API routes
-app.use("/api/books", bookRoutes);
-app.use("/api/borrows", borrowRoutes);
 
 export default app;
