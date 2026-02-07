@@ -6,6 +6,7 @@ const router = Router();
 router.get("/", getBooks);
 router.post("/", addBook);
 router.put("/:id", updateBook);
+router.patch("/:id", updateBook);
 router.delete("/:id", deleteBook);
 
 export default router;
