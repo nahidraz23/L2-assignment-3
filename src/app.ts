@@ -9,31 +9,33 @@ dotenv.config();
 connectDB();
 
 const app = express();
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://book-shelf-client-pied.vercel.app"
+];
+
 app.use(express.json());
-app.options('*', cors());
 
-app.use(cors({
-  origin: ['http://localhost:5173', 'https://book-shelf-client-pied.vercel.app'],
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
-}))
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // allow requests with no origin (Postman, server-to-server)
+      if (!origin) return callback(null, true);
 
-app.use((req, res, next) => {
-  res.setHeader(
-    'Access-Control-Allow-Origin',
-    'https://book-shelf-client-pied.vercel.app'
-  );
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'GET,POST,PUT,PATCH,DELETE,OPTIONS'
-  );
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Content-Type, Authorization'
-  );
-  next();
-});
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+  })
+);
+
+// VERY IMPORTANT for Vercel
+app.options("*", cors());
 
 // API routes
 app.use("/api/books", bookRoutes);
