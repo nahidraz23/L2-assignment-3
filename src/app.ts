@@ -9,19 +9,12 @@ dotenv.config();
 connectDB();
 
 const app = express();
-const allowedOrigins = [
-  // "http://localhost:5173",
-  "https://book-shelf-client-pied.vercel.app"
-];
-
 app.use(express.json());
 
 app.use(
   cors({
-    origin: allowedOrigins,
-    credentials: true,
-    // methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    // allowedHeaders: ["Content-Type", "Authorization"]
+    origin: "https://book-shelf-client-pied.vercel.app",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   })
 );
 
