@@ -9,7 +9,6 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(express.json());
 
 app.use(
   cors({
@@ -17,6 +16,8 @@ app.use(
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   })
 );
+
+app.use(express.json());
 
 // VERY IMPORTANT for Vercel
 app.options("*", cors());
