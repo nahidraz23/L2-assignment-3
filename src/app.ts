@@ -12,8 +12,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://book-shelf-client-pied.vercel.app",
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    origin: "https://book-shelf-client-pied.vercel.app"
   })
 );
 
